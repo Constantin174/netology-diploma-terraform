@@ -1,7 +1,7 @@
 resource "yandex_compute_instance" "studywebserviceru" {
   name       = "studywebserviceru"
   zone       = local.zone_map[terraform.workspace]
-  hostname   = "studywebservice.ru.netology.cloud"
+  hostname   = "studywebservice.ru.yc"
 
   resources {
     cores    = 2
