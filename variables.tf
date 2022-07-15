@@ -1,9 +1,9 @@
 variable "yandex_cloud_id" {
-  default = "b1gsvhhnl0k7idjjbham"
+  default = ""
 }
 
 variable "yandex_folder_id" {
-  default = "b1guh47h7vq31u9t0h9q"
+  default = ""
 }
 
 variable "zone_a" {
