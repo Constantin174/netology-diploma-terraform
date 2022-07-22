@@ -44,3 +44,22 @@ resource "local_file" "inventory_db" {
   ]
 }
 
+resource "local_file" "inventory_app" {
+
+  content = <<-DOC
+---
+  app:
+    hosts:
+      appstudywebservice.ru.yc:
+        ansible_host: ${yandex_compute_instance.appstudywebserviceru.network_interface.0.nat_ip_address}
+        ansible_user: ubuntu
+        ansible_connection: ssh
+
+    DOC
+  filename = "../netology-diploma-ansible/inventory/${terraform.workspace}-app.yml"
+
+  depends_on = [
+    yandex_compute_instance.appstudywebserviceru
+  ]
+}
+
