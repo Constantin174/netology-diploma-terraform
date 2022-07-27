@@ -63,3 +63,59 @@ resource "local_file" "inventory_app" {
   ]
 }
 
+resource "local_file" "inventory_gitlab" {
+
+  content = <<-DOC
+---
+  gitlab:
+    hosts:
+      gitlabstudywebservice.ru.yc:
+        ansible_host: ${yandex_compute_instance.gitlabstudywebserviceru.network_interface.0.nat_ip_address}
+        ansible_user: ubuntu
+        ansible_connection: ssh
+
+    DOC
+  filename = "../netology-diploma-ansible/inventory/${terraform.workspace}-gitlab.yml"
+
+  depends_on = [
+    yandex_compute_instance.gitlabstudywebserviceru
+  ]
+}
+
+resource "local_file" "inventory_runner" {
+
+  content = <<-DOC
+---
+  runner:
+    hosts:
+      runnerstudywebservice.ru.yc:
+        ansible_host: ${yandex_compute_instance.runnerstudywebserviceru.network_interface.0.nat_ip_address}
+        ansible_user: ubuntu
+        ansible_connection: ssh
+
+    DOC
+  filename = "../netology-diploma-ansible/inventory/${terraform.workspace}-runner.yml"
+
+  depends_on = [
+    yandex_compute_instance.runnerstudywebserviceru
+  ]
+}
+
+resource "local_file" "inventory_monitoring" {
+
+  content = <<-DOC
+---
+  monitoring:
+    hosts:
+      monitoringstudywebserviceru.ru.yc:
+        ansible_host: ${yandex_compute_instance.monitoringstudywebserviceru.network_interface.0.nat_ip_address}
+        ansible_user: ubuntu
+        ansible_connection: ssh
+
+    DOC
+  filename = "../netology-diploma-ansible/inventory/${terraform.workspace}-monitoring.yml"
+
+  depends_on = [
+    yandex_compute_instance.monitoringstudywebserviceru
+  ]
+}
